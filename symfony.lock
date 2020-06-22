@@ -90,8 +90,17 @@
     "gedmo/doctrine-extensions": {
         "version": "v2.4.41"
     },
+    "laminas/laminas-code": {
+        "version": "3.4.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.2.1"
+    },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.4"
+    },
+    "marc-mabe/php-enum": {
+        "version": "v4.3.0"
     },
     "monolog/monolog": {
         "version": "2.1.0"

@@ -2,13 +2,18 @@
 
 namespace App\Domain\User\Model;
 
+use App\Domain\IdentityTrait;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface
 {
-    private Uuid $id;
+    use IdentityTrait;
+
+    private UuidInterface $id;
+
+    private string $name;
 
     private string $email;
 
@@ -18,9 +23,26 @@ class User implements UserInterface
 
     private ?string $plainPassword;
 
+    private \DateTimeInterface $createAt;
+
+    public function __construct()
+    {
+        $this->id =  Uuid::fromString(self::generate()->asString());
+    }
+
     public function getId(): UuidInterface
     {
         return Uuid::fromString($this->id);
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
     public function getEmail(): ?string
@@ -42,7 +64,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -69,7 +91,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
@@ -90,8 +112,24 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials() : void
+    public function eraseCredentials(): void
     {
-         $this->plainPassword = null;
+        $this->plainPassword = null;
+    }
+
+    /**
+     * @return \DateTimeInterface
+     */
+    public function getCreateAt(): \DateTimeInterface
+    {
+        return $this->createAt;
+    }
+
+    /**
+     * @param \DateTimeInterface $createAt
+     */
+    public function setCreateAt(\DateTimeInterface $createAt): void
+    {
+        $this->createAt = $createAt;
     }
 }

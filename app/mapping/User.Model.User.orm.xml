@@ -5,7 +5,7 @@
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="App\Domain\User\Model\User"
-            repository-class="App\Repository\UserRepository"
+            repository-class="App\Infrastructure\Domain\User\Repository\UserRepository"
             table="users">
 
         <id name="id" column="id" type="uuid">
@@ -16,15 +16,12 @@
             <unique-constraint columns="email"/>
         </unique-constraints>
 
-        <field name="email" type="string" column="filename" length="255" nullable="false" unique="true"/>
+        <field name="email" type="string" column="email" length="255" nullable="false" unique="true"/>
         <field name="password" column="password" type="string"/>
         <field name="roles" column="roles" type="array"/>
-        <field name="name" column="first_name" type="string" length="64" nullable="true"/>
-        <field name="createdAt" type="datetime" column="created_at">
-            <gedmo:timestampable on="create"/^^>
-        </field>
-        <field name="updatedAt" type="datetime" column="updated_at">
-            <gedmo:timestampable on="update"/>
+        <field name="name" column="name" type="string" length="64" nullable="true"/>
+        <field name="createAt" type="datetime" column="created_at">
+            <gedmo:timestampable on="create"/>
         </field>
 
     </entity>
